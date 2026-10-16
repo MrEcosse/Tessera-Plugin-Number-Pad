@@ -1,0 +1,56 @@
+# What tools/preview.py shows (docs/PREVIEW.md): a TV channel pad that sends each digit, with Enter and Clear; a pad that
+# gathers a two-digit number and sends it on Enter to a helper; a camera pad without Clear; a pad whose action is not
+# one; and a pad with no action yet.
+tiles:
+  - tile: pad
+    name: Channel
+    entity: remote.living_room
+    options:
+      action: remote.send_command command=NUM_{digit}
+      send: each
+      enter: true
+      enter_action: remote.send_command command=ENTER
+      clear: false
+    sizes: [1x1, 2x1, 1x2, 2x2]
+  - tile: pad
+    name: TV select
+    entity: input_number.tv_select
+    options:
+      action: input_number.set_value value={code}
+      send: enter
+      enter: true
+      clear: true
+      max: 2
+    sizes: [1x1, 2x1, 1x2, 2x2, 3x3]
+  - tile: pad
+    name: Cameras
+    entity: input_select.cctv
+    options:
+      action: input_select.select_option option=Camera {code}
+      send: enter
+      enter: true
+      clear: false
+      max: 2
+    sizes: [2x2]
+  - tile: pad
+    name: Broken
+    entity: remote.living_room
+    options:
+      action: change the channel
+      send: enter
+      enter: true
+    sizes: [2x2]
+  - tile: pad
+    name: Not set up
+    sizes: [1x1, 2x1]
+
+states:
+  remote.living_room:
+    state: "on"
+    attributes: { friendly_name: Living room }
+  input_number.tv_select:
+    state: "1"
+    attributes: { friendly_name: TV select }
+  input_select.cctv:
+    state: Camera 1
+    attributes: { friendly_name: Cameras }

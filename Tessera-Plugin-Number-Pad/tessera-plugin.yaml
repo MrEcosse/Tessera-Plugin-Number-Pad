@@ -1,0 +1,52 @@
+# Number pad: the keys 0 to 9 with an optional Clear and Enter, for a TV channel, a TV or camera to switch to, or any
+# number a Home Assistant action takes. A key sends its digit at once, or the digits gather and go on Enter; the action
+# is one text with {digit} and {code} in it. docs/MANIFEST.md has every field.
+id: number_pad
+version: 0.1.0
+# 0.10 for tessera::tap_point(): which key the finger was on.
+api: "0.10"
+icon: dialpad
+maintainer: MrEcosse
+license: MIT
+stage: beta
+topics: [media, home]
+requires:
+  esphome: 2026.6.2
+boards: any
+flash_kb: 6
+
+permissions:
+  # The action is whatever a person types. These are the ones it is made for; the screen does not limit it to this
+  # list (docs/MANIFEST.md, "permissions"), so read the README's "Good to know" before you add it.
+  home_assistant_actions:
+    - remote.send_command
+    - media_player.select_source
+    - input_number.set_value
+    - input_text.set_value
+    - input_select.select_option
+    - number.set_value
+    - select.select_option
+    - script.turn_on
+
+tiles:
+  - id: pad
+    name: tile_name
+    icon: dialpad
+    # Twelve keys: a telephone's three columns where they come out large enough, else rows of four or six.
+    sizes: { min: 1x1, max: 4x4 }
+    # Twelve keys of a block and a label each, the line of digits, and the two actions as the person typed them (in the
+    # tile's own object, which is in PSRAM).
+    memory: 2600
+    # The entity the action goes to unless the action names one of its own.
+    domains: [remote, media_player, input_number, input_text, input_select, number, select, script]
+    example: tile_example
+    options:
+      - { id: action, kind: text, label: action, hint: action_hint }
+      - { id: send, kind: choice, label: send, hint: send_hint, default: each,
+          choices: [{ value: each, label: send_each }, { value: enter, label: send_enter }] }
+      - { id: enter, kind: toggle, label: enter, hint: enter_hint, default: false }
+      - { id: enter_action, kind: text, label: enter_action, hint: enter_action_hint }
+      - { id: clear, kind: toggle, label: clear, hint: clear_hint, default: true }
+      - { id: max, kind: number, min: 1, max: 8, step: 1, unit: digits, default: 3, label: max, hint: max_hint }
+      - { id: idle, kind: number, min: 0, max: 60, step: 1, unit: s, default: 10, label: idle, hint: idle_hint }
+      - { id: show, kind: toggle, label: show, hint: show_hint, default: true }

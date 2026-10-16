@@ -1,0 +1,31 @@
+{
+  "_meta": { "name": "English" },
+  "screen": {
+    "no_action": "Give the pad an action",
+    "type_number": "Type a number"
+  },
+  "app": {
+    "name": "Number pad",
+    "summary": "The keys 0 to 9 with Clear and Enter, sending each digit or the whole number to the Home Assistant action you choose.",
+    "tile_name": "Number pad",
+    "tile_example": "Keys 0 to 9 with Clear and Enter, for a channel, a TV or a camera",
+    "action": "Action",
+    "action_hint": "What a digit sends, with {digit} for the key pressed and {code} for the number so far, such as remote.send_command command=NUM_{digit} or input_number.set_value value={code}.",
+    "send": "Send",
+    "send_hint": "Each digit sends the action as soon as its key is tapped. On Enter gathers the digits, shows them, and sends the whole number when Enter is tapped.",
+    "send_each": "Each digit",
+    "send_enter": "On Enter",
+    "enter": "Enter key",
+    "enter_hint": "Show an Enter key. On Enter, it sends the number; with each digit, it needs its own action below.",
+    "enter_action": "Enter's action",
+    "enter_action_hint": "What the Enter key sends instead, such as remote.send_command command=ENTER. Empty: on Enter, the action above with the number.",
+    "clear": "Clear key",
+    "clear_hint": "Show a Clear key that empties the number typed so far.",
+    "max": "Most digits",
+    "max_hint": "How many digits the number holds. On Enter, further digits are refused; with each digit, the next one starts a new number.",
+    "idle": "Forget after",
+    "idle_hint": "Seconds without a tap after which the digits typed so far are forgotten. 0 keeps them until Clear or Enter.",
+    "show": "Show the number",
+    "show_hint": "On Enter, show the digits typed so far above the keys. Turn it off to give the keys more room."
+  }
+}
