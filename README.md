@@ -16,6 +16,28 @@ a wide, low tile they go in rows of four or six instead, with Clear and Enter at
 14 mm nor wider than half again its height. The tile is one cell at least and up to 4x4; twelve keys on one cell are
 small, so 2x2 or taller is comfortable.
 
+## Part of a set for wall panels
+
+This tile belongs to a set of four plugins for the same job: media controls that are screwed to a wall instead of held
+in the hand. Think of a conference room where the presenter needs the display's input, volume and menu without hunting
+for a remote, a sports bar where staff switch each TV to the right match and channel, a restaurant or lounge with
+background music and a screen behind the bar, a hotel or holiday-let lounge, a cinema room, or a shop-floor display.
+
+The four tiles share one idea. They are **bespoke**: each key or digit runs exactly the Home Assistant action you type,
+on exactly the entity you choose, so they work with anything Home Assistant can reach, including devices where the
+built-in tiles and Tessera's own remote card do not fit (an IR or Broadlink blaster, a Harmony hub, a streamer behind a
+script, a projector on a serial bridge, an LG webOS or Samsung TV). They all use the same action text, `action [entity]
+[field=value]`, so learning one means knowing them all, and each starts at one cell so it fits any layout.
+
+| Plugin | What it is for |
+|---|---|
+| [Transport controls](https://github.com/MrEcosse/Tessera-Plugin-Transport-Controls) | skip, stop, play, pause, eject |
+| [D-pad](https://github.com/MrEcosse/Tessera-Plugin-D-Pad) | arrows, OK, back, home, menu, guide |
+| [Volume controls](https://github.com/MrEcosse/Tessera-Plugin-Volume-Controls) | quieter, mute, louder |
+| [Number pad](https://github.com/MrEcosse/Tessera-Plugin-Number-Pad) | channels, TV or camera numbers (not PIN codes) |
+
+Use them side by side on one panel, or pick the one you need.
+
 ## Set up
 
 1. In Tessera, open **Plugins**, choose **Number pad** and tick your screens. Each screen builds once with the plugin.
@@ -49,6 +71,14 @@ as a TV does for a channel:
 | For | Action | Enter's action |
 |---|---|---|
 | An IR or Android TV remote | `remote.send_command command=NUM_{digit}` | `remote.send_command command=ENTER` |
+
+An LG webOS TV collects the digits itself, so it suits this mode. Choose the TV's media player as the entity, then:
+
+| For | Action | Enter's action |
+|---|---|---|
+| An LG webOS TV (LG webOS integration) | `webostv.button button={digit}` | `webostv.button button=ENTER` |
+
+The TV must be on, and the entity you choose must be the live one (an old registration of the same TV does nothing).
 
 In this mode an Enter key needs an **Enter's action** of its own. `{code}` is also available, as the digits tapped so far.
 

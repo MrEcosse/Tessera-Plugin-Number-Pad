@@ -2,7 +2,7 @@
 # number a Home Assistant action takes. A key sends its digit at once, or the digits gather and go on Enter; the action
 # is one text with {digit} and {code} in it. docs/MANIFEST.md has every field.
 id: number_pad
-version: 0.1.0
+version: 0.1.1
 # 0.10 for tessera::tap_point(): which key the finger was on.
 api: "0.10"
 icon: dialpad
